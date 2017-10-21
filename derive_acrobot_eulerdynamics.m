@@ -56,8 +56,8 @@ PE = simplify(m1*g*p1(3) + mt*g*pt(3) + m2*g*p2(3));
 D = simplify(D);
 H = simplify(-C*deu-G) ; %% Coriolis and Gravity terms lumped
 
-% matlabFunction(D,'file','D_CompassGaitPlanar3D');
-% matlabFunction(H,'file','H_CompassGaitPlanar3D');
+matlabFunction(D,'file','acrobot_inertia_matrix');
+matlabFunction(H,'file','acrobot_coriolis_and_gravity');
 
 %%%%%% Findings a map from  u_e to u_q %%%%
 
@@ -78,4 +78,4 @@ C = [-(1/2)*m2*l1*l2*norm(Om2)^2*hat(q1)*q2;-(1/2)*m2*l1*l2*norm(Om1)^2*hat(q2)*
 G = [((1/2)*m1+m2+mt)*g*l1*hat(q1)*e3;(1/2)*m2*g*l2*hat(q2)*e3];
 
 U_big = J*[dOm1;dOm2] + C + G; %simplify();
-%matlabFunction(U_big,'file','InputVectorFieldS2_CompassGait3D')
+matlabFunction(U_big,'file','acrobot_input')
