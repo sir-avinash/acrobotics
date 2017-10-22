@@ -237,7 +237,7 @@ subplot(4,1,3)
 plot(T,euler.q1(3,:), T,spherical.q1(3,:), T,special.q1(3,:))
 title('q1(3)')
 subplot(4,1,4)
-plot(T,vecnorm(euler.q1), T,vecnorm(spherical.q1(3,:)), T,vecnorm(special.q1(3,:)))
+plot(T,norm(euler.q1(1:3,:)), T,spherical.q1(3,:), T,special.q1(3,:))
 title('q1(3)')
 legend('Euler','S^2','SO(3)')
 
