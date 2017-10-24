@@ -1,7 +1,7 @@
 close all
 addpath('/home/exx/Avinash/My Toolbox');
 
-syms m1 m2 mt l1 l2 real
+syms m1 m2 l1 l2 real
 syms th1 th2 dth1 dth2 ddth1 ddth2 ph1 ph2 dph1 dph2 ddph1 ddph2 real
 syms g real
 
@@ -29,16 +29,14 @@ q2 = Rx(ph2)*Ry(th2)*e3;
 
 
 %%% CoM positions
-p1 = (l1/2)*q1;
-pt = (l1)*q1;
-p2 = (l1)*q1 + (l2/2)*q2;
+p1 = (l1)*q1;
+p2 = (l1)*q1 + (l2)*q2;
 
 %%% CoM velocities
 dq1 = jacobian(q1,eu1)*deu1;
 dq2 = jacobian(q2,eu2)*deu2;
 
 dp1 = jacobian(p1,eu1)*deu1;
-dpt = jacobian(pt,eu1)*deu1;
 dp2 = jacobian(p2,eu1)*deu1 + jacobian(p2,eu2)*deu2;
 
 %%% CoM accelarations
@@ -47,8 +45,8 @@ ddq2 = jacobian(dq2,eu2)*deu2 + jacobian(dq2,deu2)*ddeu2;
 
 %%% Energies 
 
-KE = simplify(0.5*m1*dp1'*dp1 + 0.5*mt*dpt'*dpt + 0.5*m2*dp2'*dp2);
-PE = simplify(m1*g*p1(3) + mt*g*pt(3) + m2*g*p2(3));
+KE = simplify(0.5*m1*dot(dp1,dp1) + 0.5*m2*dot(dp2,dp2));
+PE = simplify(m1*g*p1(3) + m2*g*p2(3));
 
 
 [D,C,G] = EoM(KE,PE,eu,deu);
@@ -56,6 +54,8 @@ PE = simplify(m1*g*p1(3) + mt*g*pt(3) + m2*g*p2(3));
 D = simplify(D);
 H = simplify(-C*deu-G) ; %% Coriolis and Gravity terms lumped
 
+matlabFunction(KE,'file','acrobot_kinetic_energy');
+matlabFunction(PE,'file','acrobot_potential_energy');
 matlabFunction(D,'file','acrobot_inertia_matrix');
 matlabFunction(H,'file','acrobot_coriolis_and_gravity');
 
