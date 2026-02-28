@@ -44,7 +44,6 @@ The system is **unactuated** (no control input) — it evolves under gravity alo
 | `acrobot_kinetic_energy.m` | Auto-generated kinetic energy function `KE(q, dq)` |
 | `acrobot_potential_energy.m` | Auto-generated potential energy function `PE(q)` |
 | `vecnorm.m` | Utility: column-wise vector norms of a matrix |
-| `CODE_REVIEW.md` | Detailed code review with identified bugs and issues |
 
 ## Dependencies
 
@@ -96,15 +95,6 @@ The dynamics are formulated as constrained Euler-Lagrange equations on the spher
 
 State: `(R₁, R₂, ω₁, ω₂)` where `Rᵢ ∈ SO(3)` are rotation matrices and `ωᵢ` are angular velocities.
 This representation includes rotational inertia `J` and avoids singularities present in Euler angles.
-
-## Known Issues
-
-See [CODE_REVIEW.md](CODE_REVIEW.md) for a detailed analysis. Key issues include:
-
-- **SO(3) kinematics bugs**: The rotation matrix derivative and angular acceleration frame transformation use incorrect conventions, causing the SO(3) simulation to diverge from the correct solution
-- **Euler angle singularities**: The S²-to-Euler angle recovery divides by terms that vanish at θ = ±π/2 and φ = -π/4
-- **Model mismatch**: The SO(3) model includes rotational inertia `J` while the other two do not, so they simulate slightly different physical systems
-- **Hardcoded paths**: The external toolbox path must be updated for your system
 
 ## License
 
