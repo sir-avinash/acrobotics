@@ -192,8 +192,8 @@ special.TE(i) = special.KE(i) + special.PE(i) ;
 disp(['Time step no: ',num2str(i)])
 end
 
-if exist('main_data')==1 && force_save==1
-save('main_data')
+if force_save==1
+    save('main_data')
 end
 
 %%%% Plots 
@@ -478,11 +478,11 @@ out = D\(-C -G + B*M);
 % omega2_dot = out(4:6);
 
 % converting R's and omegas from base-frame to world-frame
-R1_dot = -hat(omega1)*R1w;
-R2_dot = -hat(omega2)*R2w;
+R1_dot = R1w*hat(omega1);
+R2_dot = R2w*hat(omega2);
 
-omega1_dot = R1*out(1:3);
-omega2_dot = R2*out(4:6);
+omega1_dot = R1w*out(1:3);
+omega2_dot = R2w*out(4:6);
 
 dx =[reshape(R1_dot,9,1);omega1_dot;reshape(R2_dot,9,1);omega2_dot];
 
