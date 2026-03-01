@@ -384,9 +384,9 @@ Om2 = x(10:12);
 dq1 = cross2(Om1,q1);
 dq2 = cross2(Om2,q2);
 
-J = [(m1+m2)*l1^2*eye(3) -(1/2)*m2*l1*l2*hat(q1)*hat(q2);
-    -(1/2)*m2*l1*l2*hat(q2)*hat(q1) m2*l2^2*eye(3)];
-C = [-(1/2)*m2*l1*l2*norm(Om2)^2*hat(q1)*q2;-(1/2)*m2*l1*l2*norm(Om1)^2*hat(q2)*q1];
+J = [(m1+m2)*l1^2*eye(3) -m2*l1*l2*hat(q1)*hat(q2);
+    -m2*l1*l2*hat(q2)*hat(q1) m2*l2^2*eye(3)];
+C = [-m2*l1*l2*norm(Om2)^2*hat(q1)*q2;-m2*l1*l2*norm(Om1)^2*hat(q2)*q1];
 G = [(m1+m2)*g*l1*hat(q1)*e3;m2*g*l2*hat(q2)*e3];
 B =  [zeros(3);hat(q2)];
 
@@ -456,16 +456,16 @@ R2 = R2w';
 omega1 = R1*omega1w; % Here R1 and R2 are defined w.r.t world-frame
 omega2 = R2*omega2w; 
 
-D = [(J1-m1*hat(lc1)^2-m2*hat(l1)^2) -m2*hat(l1)*R1'*R2*hat(lc2);
-     -m2*hat(lc2)*R2'*R1*hat(l1) (J2-m2*hat(lc2)^2)];
+D = [(J1-m1*hat(lc1)^2-m2*hat(l1)^2) -m2*hat(l1)*R1*R2'*hat(lc2);
+     -m2*hat(lc2)*R2*R1'*hat(l1) (J2-m2*hat(lc2)^2)];
 
-C = [hat(omega1)*(J1-(m1*hat(lc1)^2)-(m2*hat(l1)^2))*omega1 + m2*hat(l1)*R1'*R2*hat(omega2)^2*lc2;
-     hat(omega2)*(J2-(m2*hat(lc2)^2))*omega2 + m2*hat(lc2)*R2'*R1*hat(omega1)^2*l1];
+C = [hat(omega1)*(J1-(m1*hat(lc1)^2)-(m2*hat(l1)^2))*omega1 + m2*hat(l1)*R1*R2'*hat(omega2)^2*lc2;
+     hat(omega2)*(J2-(m2*hat(lc2)^2))*omega2 + m2*hat(lc2)*R2*R1'*hat(omega1)^2*l1];
 
-G = [(m1*g*hat(lc1)*R1'*e3 + m2*g*hat(l1)*R1'*e3) ;
-     (m2*g*hat(lc2)*R2'*e3)];
+G = [(m1*g*hat(lc1)*R1*e3 + m2*g*hat(l1)*R1*e3) ;
+     (m2*g*hat(lc2)*R2*e3)];
 
-B = [-(R1'*R2);eye(3)];  
+B = [-(R1*R2');eye(3)];  
 
 M = [0;0;0];
 
