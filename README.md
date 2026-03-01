@@ -98,4 +98,4 @@ This representation includes rotational inertia `J` and avoids singularities pre
 
 ## License
 
-Not specified.
+Licensed under the [Apache License, Version 2.0](LICENSE).
